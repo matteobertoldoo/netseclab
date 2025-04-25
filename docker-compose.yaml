@@ -40,13 +40,7 @@ services:
 
   attacker:
     container_name: attacker
-    hostname: attacker
-    image: debian:latest
-    command: >
-      /bin/bash -c "apt update &&
-                   apt install --no-install-recommends -y dsniff arp-scan net-tools python3 python3-scapy ettercap-text-only tshark tcpdump netcat-traditional &&
-                   echo Attacker ready!!! &&
-                   tail -f /dev/null"
+    image: netsecattacker:latest
     tty: true
     cap_add:
       - NET_ADMIN
