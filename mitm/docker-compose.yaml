@@ -20,7 +20,7 @@ services:
       '"
     networks:
       mitmnet:
-        mac_address: 02:42:ac:11:00:cc
+        mac_address: "02:42:ac:11:00:cc"
         ipv4_address: 192.168.90.100
 
   client:
@@ -35,19 +35,21 @@ services:
       done"
     networks:
       mitmnet:
-        mac_address: 02:42:ac:11:00:bb
+        mac_address: "02:42:ac:11:00:bb"
         ipv4_address: 192.168.90.101
 
   attacker:
     container_name: attacker
+    hostname: attacker
     image: flipperlolli/netsecattacker:latest
     tty: true
+    privileged: true
     cap_add:
       - NET_ADMIN
       - NET_RAW
     networks:
       mitmnet:
-        mac_address: 02:42:ac:11:00:aa
+        mac_address: "02:42:ac:11:00:aa"
         ipv4_address: 192.168.90.102
 
 networks:
