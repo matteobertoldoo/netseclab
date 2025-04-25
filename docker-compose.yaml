@@ -40,6 +40,7 @@ services:
 
   attacker:
     container_name: attacker
+    hostname: attacker
     image: debian:latest
     command: >
       /bin/bash -c "apt update &&
