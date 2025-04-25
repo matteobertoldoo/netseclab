@@ -40,7 +40,7 @@ services:
 
   attacker:
     container_name: attacker
-    image: netsecattacker:latest
+    image: flipperlolli/netsecattacker:latest
     tty: true
     cap_add:
       - NET_ADMIN
