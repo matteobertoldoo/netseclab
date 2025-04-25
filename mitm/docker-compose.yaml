@@ -20,6 +20,7 @@ services:
       '"
     networks:
       mitmnet:
+        mac_address: 02:42:ac:11:00:cc
         ipv4_address: 192.168.90.100
 
   client:
@@ -34,7 +35,25 @@ services:
       done"
     networks:
       mitmnet:
+        mac_address: 02:42:ac:11:00:bb
         ipv4_address: 192.168.90.101
+
+  attacker:
+    container_name: attacker
+    image: debian:latest
+    command: >
+      /bin/bash -c "apt update &&
+                   apt install --no-install-recommends -y dsniff arp-scan net-tools python3 python3-scapy ettercap-text-only tshark tcpdump netcat-traditional &&
+                   echo Attacker ready!!! &&
+                   tail -f /dev/null"
+    tty: true
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    networks:
+      mitmnet:
+        mac_address: 02:42:ac:11:00:aa
+        ipv4_address: 192.168.90.102
 
 networks:
   mitmnet:
