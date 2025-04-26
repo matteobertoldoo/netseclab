@@ -47,7 +47,7 @@ services:
   attacker:
     container_name: attacker
     hostname: attacker
-    image: flipperlolli/netsecattacker:latest
+    image: flipperlolli/attacker:latest
     mac_address: "02:42:ac:11:00:aa"
     tty: true
     privileged: true
