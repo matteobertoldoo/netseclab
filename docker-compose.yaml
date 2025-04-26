@@ -1,8 +1,13 @@
+version: '3.8'
+
 services:
   server:
     container_name: server
     hostname: server
     image: python:3-alpine
+    mac_address: "02:42:ac:11:00:cc"
+    cap_add:
+      - NET_ADMIN
     command: |
       sh -c "apk add --no-cache bash && 
       python -c '
@@ -20,13 +25,15 @@ services:
       '"
     networks:
       mitmnet:
-        mac_address: "02:42:ac:11:00:cc"
         ipv4_address: 192.168.90.100
 
   client:
     container_name: client
     hostname: client
     image: alpine
+    mac_address: "02:42:ac:11:00:bb"
+    cap_add:
+      - NET_ADMIN
     command: >
       sh -c "apk add --no-cache curl bash && 
       while true; do 
@@ -35,21 +42,21 @@ services:
       done"
     networks:
       mitmnet:
-        mac_address: "02:42:ac:11:00:bb"
         ipv4_address: 192.168.90.101
 
   attacker:
     container_name: attacker
     hostname: attacker
     image: flipperlolli/netsecattacker:latest
+    mac_address: "02:42:ac:11:00:aa"
     tty: true
     privileged: true
     cap_add:
       - NET_ADMIN
       - NET_RAW
+    entrypoint: /bin/bash -c "echo 'PS1=\"attacker:/# \"' >> /root/.bashrc && /bin/bash"
     networks:
       mitmnet:
-        mac_address: "02:42:ac:11:00:aa"
         ipv4_address: 192.168.90.102
 
 networks:
