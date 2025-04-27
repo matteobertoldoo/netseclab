@@ -57,7 +57,7 @@ services:
     cap_add:
       - NET_ADMIN
       - NET_RAW
-    entrypoint: /bin/bash -c "echo 'PS1=\"attacker:/# \"' >> /root/.bashrc && /bin/bash"
+    entrypoint: /bin/bash -c "echo 'PS1=\"attacker:/# \"' >> /root/.bashrc && echo 1 > /proc/sys/net/ipv4/ip_forward && /bin/bash"
     networks:
       mitmnet:
         ipv4_address: 192.168.90.102
