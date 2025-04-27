@@ -1,0 +1,15 @@
+comando per eliminare tutte le immagini: 
+
+sudo docker rmi -f $(sudo docker images -q)
+
+eliminare tutti i container:
+
+sudo docker container prune -f
+
+eliminare tutte le reti:
+
+sudo docker network prune -f
+
+comando unico:
+
+sudo docker rmi -f $(sudo docker images -q) && sudo docker network prune -f && sudo docker container prune -f
