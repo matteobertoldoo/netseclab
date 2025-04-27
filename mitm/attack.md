@@ -20,8 +20,7 @@ sudo docker exec -it attacker bash
 With that rule you're telling to intercept all incoming traffic on eth0 destined for port 80 and redirect it internally to port 8080
 
 ```bash
-iptables -t nat -A PREROUTING -i eth0 \
-  -p tcp --dport 80 -j REDIRECT --to-port 8080
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
 ```
 
 ---
