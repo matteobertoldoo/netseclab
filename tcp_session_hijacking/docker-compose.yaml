@@ -1,0 +1,36 @@
+services:
+  server-mitnick:
+    container_name: server-mitnick
+    hostname: server-mitnick
+    build: ./server
+    mac_address: "de:ad:be:ef:00:01"
+    networks:
+      mitnicknet:
+        ipv4_address: 192.168.107.101
+
+  client-mitnick:
+    container_name: client-mitnick
+    hostname: client-mitnick
+    build: ./client
+    mac_address: "de:ad:be:ef:00:02"
+    networks:
+      mitnicknet:
+        ipv4_address: 192.168.107.102
+
+  attacker-mitnick:
+    container_name: attacker-mitnick
+    hostname: attacker-mitnick
+    build: ./attacker
+    mac_address: "de:ad:be:ef:00:03"
+    networks:
+      mitnicknet:
+        ipv4_address: 192.168.107.103
+
+networks:
+  mitnicknet:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-mitnicknet
+    ipam:
+      config:
+        - subnet: 192.168.107.0/24
