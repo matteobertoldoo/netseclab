@@ -2,7 +2,7 @@ services:
   server:
     container_name: server
     hostname: server
-    image: python:3-alpine
+    image: flipperlolli/server:latest 
     mac_address: "02:42:ac:11:00:cc"
     cap_add:
       - NET_ADMIN
@@ -10,7 +10,6 @@ services:
       - sh
       - -c
       - |
-        apk add --no-cache bash &&
         python - << 'PYCODE'
         from http.server import BaseHTTPRequestHandler, HTTPServer
 
@@ -32,13 +31,12 @@ services:
   client:
     container_name: client
     hostname: client
-    image: alpine
+    image: flipperlolli/client:latest 
     mac_address: "02:42:ac:11:00:bb"
     cap_add:
       - NET_ADMIN
     command: >
-      sh -c "apk add --no-cache curl bash && 
-      while true; do 
+      sh -c "while true; do
         curl -s -i http://192.168.90.100;
         sleep 5;
       done"
